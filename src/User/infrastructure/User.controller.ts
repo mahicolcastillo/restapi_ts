@@ -1,5 +1,5 @@
 import { Router, Response, Request } from 'express';
-import UserInteractor from '../../core/interactors';
+import UserInteractor from '../application';
 // import { check } from 'express-validator';
 // import {
 //     postUser
@@ -11,7 +11,8 @@ const router = Router();
 
 router.post('/', async(req: Request, res: Response) => {
     const body = req.body;
-    const { status, data, error } = await UserInteractor.post(body);
+    const { status, data, error } = await UserInteractor.save(body);
+
     res.status(status).json({data, error});
 });
 

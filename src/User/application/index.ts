@@ -1,5 +1,5 @@
-import UserInteractor from './userInteractor';
-import UserDataSource from '../../dataSources/UserDataSource';
+import UserInteractor from './services/User.service';
+import UserDataSource from '../infrastructure/User.datasource';
 
 const userDataSource = new UserDataSource();
 const userInteractor = new UserInteractor(userDataSource);

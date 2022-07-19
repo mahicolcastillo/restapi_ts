@@ -1,7 +1,7 @@
 import express from 'express';
 import { Request, Response } from 'express';
-import mongoConnect from '../dataSources/mongoose';
-import UserController from '../controllers/http/UserController';
+import mongoConnect from './mongoose/index';
+import UserController from '../User/infrastructure/User.controller';
 import cors from 'cors';
 import dotenv from 'dotenv';
 dotenv.config();
