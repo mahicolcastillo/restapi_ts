@@ -1,10 +1,12 @@
 import express from 'express';
 import { Request, Response } from 'express';
-import mongoConnect from './mongoose/index';
-import UserController from '../User/infrastructure/User.controller';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import mongoConnect from './mongoose/index';
 dotenv.config();
+
+import UserController from '../User/infrastructure/controllers/index';
+import ProductController from '../Product/infrastructure/controllers/index';
 
 const app = express();
 const portApi = process.env.PORT || 3000;
@@ -19,6 +21,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.use('/users', UserController);
+app.use('/products', ProductController);
 
 app.listen(portApi, () => {
     console.log(`Server started on port ${portApi}`);

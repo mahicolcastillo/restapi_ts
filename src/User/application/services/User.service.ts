@@ -1,10 +1,10 @@
 import UserRepository from '../../domain/User.repository';
 import UserEntity from '../../domain/User.entity';
-import { HTTP_STATUS } from './utils/http';
-import { IResponse } from './utils/IResponse';
+import { HTTP_STATUS } from '../../../utils/http';
+import { IResponse } from '../../../utils/IResponse';
 import bcryptjs from 'bcryptjs';
 
-class UserInteractor {
+class UserService {
   userRepository: UserRepository;
 
   constructor(userRepository: UserRepository) {
@@ -20,7 +20,7 @@ class UserInteractor {
     }
   }
 
-  async save(user: UserEntity): Promise<IResponse<UserEntity | undefined>> {
+  async saveUser(user: UserEntity): Promise<IResponse<UserEntity | undefined>> {
     const userModel: UserEntity = {
         name            : user.name,
         surnameFather   : user.surnameFather,
@@ -37,10 +37,10 @@ class UserInteractor {
       const salt = bcryptjs.genSaltSync(10);
       userModel.password = bcryptjs.hashSync(userModel.password, salt);
 
-      const response = await this.userRepository.save(userModel);
+      const response = await this.userRepository.saveUser(userModel);
       // console.log(response);
       
-      return { status: HTTP_STATUS.OK, data: response };
+      return { status: HTTP_STATUS.CREATE, data: response };
     } catch (error) {
       return { status: HTTP_STATUS.INTERNAL_ERROR, error};
     }
@@ -59,4 +59,4 @@ class UserInteractor {
   }
 }
 
-export default UserInteractor;
+export default UserService;

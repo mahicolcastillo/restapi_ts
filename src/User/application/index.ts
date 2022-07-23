@@ -1,7 +1,7 @@
-import UserInteractor from './services/User.service';
-import UserDataSource from '../infrastructure/User.datasource';
+import UserService from './services/User.service';
+import UserDataSource from '../infrastructure/database/User.datasource';
 
 const userDataSource = new UserDataSource();
-const userInteractor = new UserInteractor(userDataSource);
+const userService = new UserService(userDataSource);
 
-export default userInteractor;
+export default userService;

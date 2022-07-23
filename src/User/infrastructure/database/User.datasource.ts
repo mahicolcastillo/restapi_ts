@@ -1,8 +1,8 @@
-import userRepository from '../domain/User.repository';
-import User from '../domain/User.entity';
-import UserSchema from './User.schema';
+import UserRepository from '../../domain/User.repository';
+import User from '../../domain/User.entity';
+import UserSchema from './schemas/User.schema';
 
-class UserDataSource implements userRepository {
+class UserDataSource implements UserRepository {
     public async getAll(): Promise<User[]> {
         const userSchema: User[] = await UserSchema.find();
         return userSchema;
@@ -18,7 +18,7 @@ class UserDataSource implements userRepository {
         return mailExist;
     }
 
-    public async save(body: User): Promise<User> {
+    public async saveUser(body: User): Promise<User> {
         // try {
             const user = new UserSchema(body);
             
